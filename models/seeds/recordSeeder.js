@@ -13,7 +13,7 @@ const Category = require('../category')
 const SEED_RECORD = require('../seed_record.json')
 
 const SEED_USER = {
-  name: 'root',
+  name: '廣志',
   email: 'root@example.com',
   password: '0000'
 }
