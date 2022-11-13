@@ -1,0 +1,84 @@
+<div class="row mt-5">
+  <div class="col-md-8 m-auto">
+    <div class="card card-body">
+
+      {{!-- sort --}}
+      <div class="d-fex align-items-center">
+        <form action="./sortby" method="GET" id="sortby">
+          <select onchange="this.form.submit()" class="form-select" name="sort" form="sortby">
+            <option selected>類別</option>
+            <option {{#is sort 1}} selected {{/is}} value="1">家居物業</option>
+            <option {{#is sort 2}} selected {{/is}}value="2">交通出行</option>
+            <option {{#is sort 3}} selected {{/is}}value="3">休閒娛樂</option>
+            <option {{#is sort 4}} selected {{/is}}value="4">餐飲食品</option>
+            <option {{#is sort 5}} selected {{/is}}value="5">其他</option>
+          </select>
+        </form>
+      </div>
+
+      {{!-- totalAmount --}}
+      <h2 class="text-center mt-3">總金額</h2>
+      <h1 class="text-center mb-3">{{totalAmount}}
+      </h1>
+
+      {{!-- List --}}
+      <ul class="list-group mb-3">
+
+        {{!-- display list --}}
+        {{#each records}}
+        <li class="list-group-item">
+          <div class="row justify-content-between align-items-center">
+            <div class="col-1">
+
+              {{!-- categoryIcon --}}
+              {{!--根據不同類別包上if 區分五種icon--}}
+              {{#is this.categoryIconId 1}}<h4><i class="fa-solid fa-house"></i>
+              </h4>{{/is}}
+
+              {{#is this.categoryIconId 2}}<h4><i class="fa-solid fa-van-shuttle"></i>
+              </h4>{{/is}}
+
+              {{#is this.categoryIconId 3}}<h4><i class="fa-solid fa-face-grin-beam"></i>
+              </h4>{{/is}}
+
+              {{#is this.categoryIconId 4}}<h4><i class="fa-solid fa-utensils"></i></h4>{{/is}}
+
+              {{#is this.categoryIconId 5}}<h4><i class="fa-solid fa-pen"></i></h4>{{/is}}
+
+            </div>
+            <div class="col-5">
+              {{!-- title --}}
+              <h4 class="my-1">
+                {{ this.name }}
+              </h4>
+              {{!-- date --}}
+              <p class="m-0">
+                {{ this.date }}
+              </p>
+            </div>
+            {{!-- amount --}}
+            <div class="col">
+              <h4 style="display: inline; vertical-align: middle; align-self-end">
+                {{ this.amount }}
+              </h4>
+
+            </div>
+            {{!-- button --}}
+            <div class="col-3">
+              {{!-- edit --}}
+              <a class="btn btn-success align-self-end" href="./records/{{ this._id }}/edit">edit</a>
+              {{!-- delete --}}
+              <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+                <button class="btn btn-danger align-self-end" type="submit">delete</button>
+              </form>
+            </div>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+      {{!-- create --}}
+      <a href="/records/new" class="btn btn-secondary mb-3">Create</a>
+
+    </div>
+  </div>
+</div>
